@@ -43,7 +43,11 @@ def send_email():
         "This is an automated email. The script is a little wonky so there might be some mistakes. \n"
         + file_contents
     )
-    yag.send("pnaganab@gmail.com", "Events in Durham This Week", contents)
+    emails = []
+    with open("recipients.txt", "r") as file:
+        for line in file:
+            emails.append(line.strip())
+    yag.send(emails, "Events in Durham This Week", contents)
     click.echo("Sent email")
 
 
